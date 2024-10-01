@@ -3,11 +3,10 @@ import { CoAgentsFeatures } from "@/components";
 
 # Router-Mode and Agent-Lock mode
 
-CopilotKit can be used in router-mode, and in agent-lock mode.
+CopilotKit can operate in two distinct modes;
+The router-mode, and the agent-lock mode.
 
-CopilotKit can operate in two distinct modes:
-
-## Router Mode:
+## Router Mode
 In router mode, CopilotKit acts as a central hub, dynamically selecting and routing to different agents or actions based on the user's input. This mode offers flexibility and allows for a more diverse range of interactions.
 
 To use router mode, configure your CopilotKit component like this:
@@ -20,7 +19,7 @@ To use router mode, configure your CopilotKit component like this:
 
 In this mode, CopilotKit will intelligently route requests to the most appropriate agent or action based on the context and user input.
 
-## Agent-Lock Mode:
+## Agent-Lock Mode
 In agent-lock mode, CopilotKit is configured to work exclusively with a specific agent. This mode is useful when you want to focus on a particular task or domain, ensuring all interactions are handled by a dedicated agent.
 
 To use agent-lock mode, specify the agent name in the CopilotKit component:
