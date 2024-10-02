@@ -1,0 +1,57 @@
+# Working with agent state
+
+One major way CoAgents differ from regular AI interactions is the ability to share and sync state betweeen the agent and your frontend, providing rich, accurate context for what your users are trying to do that can be read and written to improve interactions with your agent.
+
+### Streaming state updates
+
+CopilotKit will automatically sync state between your LangGraph agent and the frontend when entering or exiting a node.
+
+For more detailed user feedback or observability, you can also configure CopilotKit to stream messages, LLM state updates and tool calls from your LangGraph agent by setting some options in our Python SDK.
+
+```python
+config = copilotkit_customize_config(
+  config,
+  # this will stream messages back to the chat window
+  emit_messages=True,
+  # this will stream tool calls to CopilotKit (call frontend actions)
+  emit_tool_calls=True,
+  # this will stream tool calls *as if* they were state
+  emit_intermediate_state=[
+    {
+      "state_key": "outline",
+      "tool": "set_outline",
+      "tool_argument": "outline",
+    }
+  ]
+)
+```
+
+[Read more about state streaming](/coagents/feature-state-streaming)
+
+### Working with agent state from the frontend
+
+CopilotKit provides React hooks for accessing your agent's state in the frontend, allowing you to get live updates in response to state changes, as well as to update the shared state from anywhere in your application.
+
+We provide two hooks to access the shared agent state:
+
+1. `useCoAgent` to access the state of the agent from anywhere in your application.
+
+```tsx
+const { state: carRentalState, setState: setCarRentalState } = useCoAgent({
+  name: "car_rental_agent",
+});
+```
+
+2. `useCoAgentAction` to access the state and render it to the chat window.
+
+```tsx
+useCoAgentAction({
+  name: "car_rental_agent",
+  // this is optional - can also have an action by agent
+  nodeName: "confirm_node",
+  // render can be a function or a string, just like useCopilotAction
+  render: "Confirming rental...",
+});
+```
+
+[Read more about sharing agent state](/coagents/feature-shared-state)
